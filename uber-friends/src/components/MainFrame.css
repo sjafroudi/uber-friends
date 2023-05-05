@@ -1,0 +1,23 @@
+.main-frame-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(0, 0, 0);
+  }
+  
+  @media (max-width: 600px) {
+    .main-frame-container {
+      padding: 10px;
+    }
+  }
+
+  .solo {
+    height: 3vmin;
+    pointer-events: none;
+  }
+
+  .friends {
+    height: 3vmin;
+    pointer-events: none;
+  }
