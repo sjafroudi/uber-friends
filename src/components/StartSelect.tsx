@@ -26,6 +26,7 @@ const StartSelect = () => {
   const chooseOption = (winnerIndex: number, loserIndex: number) => {
     updateRatings(winnerIndex, loserIndex);
 
+    // Stop after n iterations
     if (iteration >= 4) {
       // Save the ranking to local storage or any other preferred storage
       localStorage.setItem("foodRanking", JSON.stringify(options));
