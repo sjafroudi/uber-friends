@@ -20,10 +20,12 @@ const MainFrame = () => {
             </Link>
           </div>
           <div className="col">
-            <Button variant="primary" type="submit" className="w-100">
-              <img src={friends} alt="Friends" className="me-2 friends" />
-              With Friends
-            </Button>
+            <Link to="/friends">
+              <Button variant="primary" type="submit" className="w-100">
+                <img src={friends} alt="Friends" className="me-2 friends" />
+                With Friends
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
