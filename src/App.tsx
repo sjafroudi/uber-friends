@@ -5,6 +5,8 @@ import LocationInput from "./components/LocationInput";
 import StartSelect from "./components/StartSelect";
 import Results from "./components/Results";
 import CreateOrJoinRoom from "./components/CreateOrJoinRoom";
+import CreateRoom from "./components/CreateRoom";
+import JoinRoom from "./components/JoinRoom";
 
 function App() {
   return (
@@ -12,9 +14,12 @@ function App() {
       <Routes>
         <Route path="/" element={<MainFrame />} />
         <Route path="/solo" element={<StartSelect />} />
-        <Route path="/friends" element={<CreateOrJoinRoom />} />
         <Route path="/start" element={<StartSelect />} />
         <Route path="/results" element={<Results />} />
+        <Route path="/friends" element={<CreateOrJoinRoom />} />
+        <Route path="/create-room" element={<CreateRoom />} />
+        <Route path="/join-room" element={<JoinRoom />} />
+        <Route path="/start/:roomID" element={<StartSelect />} />
       </Routes>
     </Router>
   );
