@@ -4,15 +4,13 @@ import MainFrame from "./components/MainFrame";
 import LocationInput from "./components/LocationInput";
 import StartSelect from "./components/StartSelect";
 import Results from "./components/Results";
-import CreateOrJoinRoom from "./components/CreateOrJoinRoom";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<MainFrame />} />
-        <Route path="/solo" element={<StartSelect />} />
-        <Route path="/friends" element={<CreateOrJoinRoom />} />
+        <Route path="/solo" element={<LocationInput />} />
         <Route path="/start" element={<StartSelect />} />
         <Route path="/results" element={<Results />} />
       </Routes>
