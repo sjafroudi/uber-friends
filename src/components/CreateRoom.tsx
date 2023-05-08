@@ -9,11 +9,17 @@ import {
   FacebookMessengerIcon,
 } from "react-share";
 
-const socket = io("http://localhost:4000");
-
 const CreateRoom = () => {
   const [newRoomID, setNewRoomID] = useState("");
   const navigate = useNavigate();
+  const socket = io("http://localhost:3000");
+
+  socket.on("greeting-from-server", function (message) {
+    console.log(message.greeting);
+    socket.emit("greeting-from-client", {
+      greeting: "Hello Server",
+    });
+  });
 
   const createRoom = () => {
     const roomID = Math.random().toString(36).substr(2, 5);
@@ -21,13 +27,11 @@ const CreateRoom = () => {
     socket.emit("createRoom", roomID);
   };
 
-  const shareRoom = () => {
-    // Implement the share functionality here
-    console.log("Share button clicked");
-  };
-
   const startGame = () => {
     navigate(`/start/${newRoomID}`);
+    socket.on("connect", () => {
+      console.log("socket.id " + socket.id); // x8WIv7-mJelg7on_ALbx
+    });
   };
 
   return (

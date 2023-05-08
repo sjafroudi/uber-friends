@@ -4,18 +4,19 @@ import { io } from "socket.io-client";
 import "./MainFrame.css";
 import Button from "react-bootstrap/Button";
 
-const socket = io("http://localhost:4000");
-
 const JoinRoom = () => {
   const [roomID, setRoomID] = useState("");
   const navigate = useNavigate();
 
   const joinRoom = () => {
+    const socket = io("http://localhost:3000");
     socket.emit("joinRoom", roomID);
     navigate(`/start/${roomID}`);
+    socket.on("updateUsers", (users) => {
+      localStorage.setItem("currentRoomID", roomID);
+      console.log("Updated users in room:", users);
+    });
   };
-
-  localStorage.setItem("currentRoomID", roomID);
 
   return (
     <div className="main-frame-container d-flex align-items-center justify-content-center vh-100">
