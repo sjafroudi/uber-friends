@@ -56,23 +56,6 @@ const StartSelect = () => {
     });
   };
 
-  //   const renderRanking = () => {
-  //     const sortedOptions = [...options].sort((a, b) => b.rating - a.rating);
-  //     return (
-  //       <div className="mt-5">
-  //         <h2 className="text-center">Ranking</h2>
-  //         <ul>
-  //           {sortedOptions.map((option, index) => (
-  //             <li key={index}>
-  //               {index + 1}. {option.emoji} {option.name} (
-  //               {option.rating.toFixed(2)})
-  //             </li>
-  //           ))}
-  //         </ul>
-  //       </div>
-  //     );
-  //   };
-
   return (
     <div className="main-frame-container d-flex align-items-center justify-content-center vh-100">
       <div className="container">
@@ -95,15 +78,6 @@ const StartSelect = () => {
             </button>
           </div>
         </div>
-        {/* <div className="main-frame-container d-flex align-items-center justify-content-center vh-100"> */}
-        {/* <div className="container"> */}
-        {/* <h1 className="text-center pb-5">Food Ranking</h1> */}
-        {/* <div className="row row-cols-1 row-cols-md-2 g-3"> */}
-        {/* ...existing buttons code... */}
-        {/* </div> */}
-        {/* {renderRanking()} */}
-        {/* </div> */}
-        {/* </div> */}
       </div>
     </div>
   );

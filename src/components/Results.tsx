@@ -2,9 +2,7 @@
 import React from "react";
 
 const Results = () => {
-  // get food ranking from local storage
   const foodRanking = JSON.parse(localStorage.getItem("foodRanking") || "[]");
-  // create shallow copy of foodRanking and sort from highest to lowest score
   const sortedOptions = [...foodRanking].sort((a, b) => b.rating - a.rating);
 
   return (

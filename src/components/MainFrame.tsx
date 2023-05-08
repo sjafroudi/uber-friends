@@ -3,7 +3,7 @@ import "./MainFrame.css";
 import Button from "react-bootstrap/Button";
 import solo from "../img/solo.svg";
 import friends from "../img/friends.svg";
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const MainFrame = () => {
   return (

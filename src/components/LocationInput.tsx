@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const handleUseCurrentLocation = () => {
   if (navigator.geolocation) {
@@ -36,7 +36,7 @@ const LocationInput = () => {
           >
             Use Current Location
           </Button>
-          <Link to="/results">
+          <Link to="/start">
             <Button variant="primary" type="submit" className="mt-5">
               Next
             </Button>
