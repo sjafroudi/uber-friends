@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import EloRank from "elo-rank";
 import { useNavigate } from "react-router-dom";
 import foodOptions from "./foodOptions";
+import { useParams } from "react-router-dom";
 
 const StartSelect = () => {
   const [iteration, setIteration] = useState(0);
@@ -9,6 +10,14 @@ const StartSelect = () => {
   const [currentPair, setCurrentPair] = useState([0, 1]);
   const elo = new EloRank(32);
   const navigate = useNavigate();
+
+  const { roomID } = useParams();
+
+  if (roomID) {
+    console.log("room id" + roomID);
+  } else {
+    console.log("no roomID");
+  }
 
   const updateRatings = (winnerIndex: number, loserIndex: number) => {
     const winner = options[winnerIndex];
