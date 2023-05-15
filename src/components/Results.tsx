@@ -1,9 +1,15 @@
-// Results.tsx
-import React from "react";
+import React, { useEffect } from "react";
+import socket from "./socket/socket";
+import { useParams } from "react-router-dom";
 
 const Results = () => {
   const foodRanking = JSON.parse(localStorage.getItem("foodRanking") || "[]");
   const sortedOptions = [...foodRanking].sort((a, b) => b.rating - a.rating);
+  const { roomID } = useParams();
+
+  useEffect(() => {
+    socket.emit("send-ranking", { results: sortedOptions, roomID });
+  }, []); // [] dependency array (this effect runs once on mount)
 
   return (
     <div className="container mt-5">

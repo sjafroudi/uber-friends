@@ -1,21 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import "./MainFrame.css";
 import Button from "react-bootstrap/Button";
-
-const socket = io("http://localhost:4000");
+import socket from "./socket/socket";
+import { Link } from "react-router-dom";
 
 const JoinRoom = () => {
   const [roomID, setRoomID] = useState("");
-  const navigate = useNavigate();
 
   const joinRoom = () => {
-    socket.emit("joinRoom", roomID);
-    navigate(`/start/${roomID}`);
+    // Emit a 'join' event to the server, with the room ID as the data.
+    socket.emit("join", roomID);
   };
-
-  localStorage.setItem("currentRoomID", roomID);
 
   return (
     <div className="main-frame-container d-flex align-items-center justify-content-center vh-100">
@@ -28,9 +25,11 @@ const JoinRoom = () => {
           onChange={(e) => setRoomID(e.target.value)}
           className="form-control w-100 mb-3"
         />
-        <Button variant="primary" onClick={joinRoom} disabled={!roomID}>
-          Join Room
-        </Button>
+        <Link to={`/start/${roomID}`}>
+          <Button variant="primary" onClick={joinRoom} disabled={!roomID}>
+            Join Room
+          </Button>
+        </Link>
       </div>
     </div>
   );

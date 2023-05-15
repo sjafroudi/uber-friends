@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import EloRank from "elo-rank";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import foodOptions from "./foodOptions";
+import socket from "./socket/socket";
 
 const StartSelect = () => {
   const [iteration, setIteration] = useState(0);
@@ -9,6 +10,8 @@ const StartSelect = () => {
   const [currentPair, setCurrentPair] = useState([0, 1]);
   const elo = new EloRank(32);
   const navigate = useNavigate();
+
+  const { roomID } = useParams();
 
   const updateRatings = (winnerIndex: number, loserIndex: number) => {
     const winner = options[winnerIndex];
@@ -20,19 +23,19 @@ const StartSelect = () => {
     winner.rating = elo.updateRating(expectedScoreWinner, 1, winner.rating);
     loser.rating = elo.updateRating(expectedScoreLoser, 0, loser.rating);
 
-    setOptions([...options]);
+    const newOptions = [...options];
+    setOptions(newOptions);
+
+    // Save the updated rankings to local storage immediately
+    localStorage.setItem("foodRanking", JSON.stringify(newOptions));
   };
 
   const chooseOption = (winnerIndex: number, loserIndex: number) => {
     updateRatings(winnerIndex, loserIndex);
 
-    // Stop after n iterations
+    // Navigate to the results page after n iterations
     if (iteration >= 4) {
-      // Save the ranking to local storage or any other preferred storage
-      localStorage.setItem("foodRanking", JSON.stringify(options));
-
-      // Redirect to the results page
-      navigate("/results");
+      navigate(`/results/${roomID}`);
       return;
     }
 

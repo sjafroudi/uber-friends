@@ -20,6 +20,7 @@ function App() {
         <Route path="/create-room" element={<CreateRoom />} />
         <Route path="/join-room" element={<JoinRoom />} />
         <Route path="/start/:roomID" element={<StartSelect />} />
+        <Route path="/results/:roomID" element={<Results />} />
       </Routes>
     </Router>
   );

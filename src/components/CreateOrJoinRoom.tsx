@@ -1,26 +1,8 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import { io } from "socket.io-client";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-const socket = io("http://localhost:4000");
+import { Link } from "react-router-dom";
 
 const CreateOrJoinRoom = () => {
-  const [roomID, setRoomID] = useState("");
-  const navigate = useNavigate();
-
-  const createRoom = () => {
-    const newRoomID = Math.random().toString(36).substr(2, 5);
-    socket.emit("createRoom", newRoomID);
-    navigate(`/start/${newRoomID}`);
-  };
-
-  const joinRoom = () => {
-    socket.emit("joinRoom", roomID);
-    navigate(`/start/${roomID}`);
-  };
-
   return (
     <div className="main-frame-container d-flex align-items-center justify-content-center vh-100">
       <div className="container">
