@@ -3,7 +3,6 @@ import EloRank from "elo-rank";
 import { useNavigate, useParams } from "react-router-dom";
 import foodOptions from "./foodOptions";
 import socket from "./socket/socket";
-import { useParams } from "react-router-dom";
 
 const StartSelect = () => {
   const [iteration, setIteration] = useState(0);
