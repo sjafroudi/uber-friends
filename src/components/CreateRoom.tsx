@@ -1,69 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
+import { Link } from "react-router-dom";
 import {
   WhatsappShareButton,
   WhatsappIcon,
   FacebookMessengerShareButton,
   FacebookMessengerIcon,
 } from "react-share";
+import socket from "./socket/socket";
 
 const CreateRoom = () => {
-  const [newRoomID, setNewRoomID] = useState("");
-  const navigate = useNavigate();
-  const socket = io("http://localhost:3000");
+  const [roomID, setRoomID] = useState("");
 
-  socket.on("greeting-from-server", function (message) {
-    console.log(message.greeting);
-    socket.emit("greeting-from-client", {
-      greeting: "Hello Server",
-    });
-  });
+  useEffect(() => {
+    const newRoomID = Math.random().toString(36).substr(2, 5);
+    setRoomID(newRoomID);
+  }, []); // Dependency array is empty, so this effect runs once on mount
 
-  const createRoom = () => {
-    const roomID = Math.random().toString(36).substr(2, 5);
-    setNewRoomID(roomID);
-    socket.emit("createRoom", roomID);
-  };
-
-  const startGame = () => {
-    navigate(`/start/${newRoomID}`);
-    socket.on("connect", () => {
-      console.log("socket.id " + socket.id); // x8WIv7-mJelg7on_ALbx
-    });
+  const joinRoom = () => {
+    // Emit a 'join' event to the server, with the room ID as the data.
+    socket.emit("join", roomID);
   };
 
   return (
     <div className="main-frame-container d-flex align-items-center justify-content-center vh-100">
       <div className="container text-center">
         <h1>Create Room</h1>
-        {!newRoomID && (
-          <Button variant="primary" onClick={createRoom}>
-            Create Room
+        <div className="container">
+          <Button className="m-1" variant="light">
+            Room ID: {roomID}
           </Button>
-        )}
-        {newRoomID && (
-          <>
-            <div className="container">
-              <Button className="m-1" variant="light">
-                Room ID: {newRoomID}
-              </Button>
-              <WhatsappShareButton url="https://uber.github.io/kepler.gl/">
-                <WhatsappIcon size={32} />
-              </WhatsappShareButton>{" "}
-              <FacebookMessengerShareButton
-                appId="139691692416764"
-                url="https://uber.github.io/kepler.gl/"
-              >
-                <FacebookMessengerIcon size={32} />
-              </FacebookMessengerShareButton>
-              <Button variant="primary" onClick={startGame} className="m-1">
-                Start Game
-              </Button>
-            </div>
-          </>
-        )}
+          <WhatsappShareButton url="https://uber.github.io/kepler.gl/">
+            <WhatsappIcon size={32} />
+          </WhatsappShareButton>{" "}
+          <FacebookMessengerShareButton
+            appId="139691692416764"
+            url="https://uber.github.io/kepler.gl/"
+          >
+            <FacebookMessengerIcon size={32} />
+          </FacebookMessengerShareButton>
+          <Link to={`/start/${roomID}`}>
+            <Button variant="primary" onClick={joinRoom} className="m-1">
+              Start Game
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
