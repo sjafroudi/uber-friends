@@ -3,10 +3,14 @@ var express = require('express'),
     http = require('http'),
     socketIO = require('socket.io'),
     server, io;
+
 app.use(express.static(__dirname + '/build'));
-app.get('/', function (req, res) {
+
+// This route deals with any routes not already handled above
+app.get('*', function (req, res) {
   res.sendFile(__dirname + '/build/index.html');
 });
+
 server = http.Server(app);
 console.log(server);
 server.listen(3000);
