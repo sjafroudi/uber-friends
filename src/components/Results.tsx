@@ -22,6 +22,15 @@ const Results = () => {
           </li>
         ))}
       </ul>
+      <h1 className="text-center">Group Food Ranking Results</h1>
+      <ul>
+        {sortedOptions.map((option, index) => (
+          <li key={index}>
+            {index + 1}. {option.emoji} {option.name} (
+            {option.rating.toFixed(2)})
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
